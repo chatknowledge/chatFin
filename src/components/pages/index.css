@@ -1,0 +1,6 @@
+.cpnt_pages {
+    height: calc(100% - 50px);
+}
+.cpnt_pages > * {
+    height: 100%;
+}

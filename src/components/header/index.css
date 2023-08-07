@@ -1,0 +1,20 @@
+.cpnt_header {
+    display: flex;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 40px;
+    border-bottom: 1px solid #e2e2e2;
+}
+.cpnt_header .logo {
+    margin-right: 50px;
+}
+.cpnt_header .tabbar {
+    display: flex;
+}
+.cpnt_header .tabbar .tab {
+    margin-right: 20px;
+    cursor: pointer;
+}
+.cpnt_header .tabbar .tab:hover {
+    color: blueviolet;
+}

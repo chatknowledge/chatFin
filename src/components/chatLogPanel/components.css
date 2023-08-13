@@ -1,0 +1,71 @@
+.chat_panel .user_log {
+  width: 100%;
+  margin: 5px 0 5px auto;
+  padding: 16px 20px;
+
+  border-radius: 10px;
+  border: 1px solid rgb(var(--secondary-color));
+  box-shadow: 0px 4px 7px 0px rgba(var(--primary-color), 0.10);
+
+  color: rgb(var(--primary-color));
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.chat_panel .gpt_log {
+  width: 100%;
+  margin: 14px auto 14px 0;
+  padding: 30px 20px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(var(--primary-color), 0.4);
+  background-color: white;
+}
+
+.chat_panel .gpt_log_title {
+  margin: 0 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: rgb(var(--primary-color));
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.chat_panel .gpt_log_content {
+  margin: 15px 0;
+  padding: 10px;
+
+  border-radius: 5px;
+  background: #F7F6FB;
+  
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.chat_panel .gpt_log_chart {
+  margin-top: 30px;
+  height: 300px;
+
+  border-radius: 10px;
+  box-shadow: 0px 0px 21px 6px #E1DDFF;
+}
+
+.chat_panel .gpt_loading_sign {
+  margin-top: 25px;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: #5C6570;
+}
+
+.chat_panel .gpt_loading_sign>img {
+  height: 17px;
+  padding: 0 6px;
+}

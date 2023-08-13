@@ -1,5 +1,5 @@
 .cpnt_pages {
-    height: calc(100% - 50px);
+    height: calc(100% - 84px);
 }
 .cpnt_pages > * {
     height: 100%;

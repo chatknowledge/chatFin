@@ -7,17 +7,17 @@ const Index = () => {
     const [pageIndex, setpageIndex] = gctx.pageIndex
     return (
         <div className="cpnt_header">
-            <div className="logo">logo</div>
+            <div className="logo">ChatFinance</div>
             <div className="tabbar">
-                <div className="tab" onClick={() => setpageIndex(0)}>
-                    chat
+                <div className={"tab" + (pageIndex === 0 ? " active" : "")} onClick={() => setpageIndex(0)}>
+                    对话
                 </div>
-                <div className="tab" onClick={() => setpageIndex(1)}>
-                    pdf
+                <div className={"tab" + (pageIndex === 1 ? " active" : "")} onClick={() => setpageIndex(1)}>
+                    研报分析
                 </div>
             </div>
             <div className="space" style={{ flex: 1 }}></div>
-            <div className="login">login</div>
+            <div className="login">登录</div>
         </div>
     )
 }

@@ -1,22 +1,22 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const baseURL = ''
+const baseURL = 'https://chatlaw.cloud/chatfin'
 
-const request = function (method, url, data) {
-    axios(
-        {
-            method,
-            url: baseURL + url,
-            data
-        },
-        {
-            headers: {}
-        }
-    )
-}
+const axiosInstance = axios.create({
+  baseURL
+})
 
 const API = {
-    chatBI: () => request('POST', '/chat_bi', {})
+  postChatAutoReport: (query) => axiosInstance.post('/chat_auto_report', { query }).then((res) => {
+    console.log(res);
+    return res
+  }),
+  postChatAutoBI: (query) => axiosInstance.post('/chat_auto_bi', { query })
 }
+
+// const API = {
+//   postChatAutoReport: (query) => Promise.resolve(postChatAutoReportMock),
+//   postChatAutoBI: (query) => Promise.resolve(postChatAutoBIMock)
+// }
 
 export default API

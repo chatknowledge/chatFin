@@ -1,11 +1,17 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
 }
 html,
 body,
 #root {
-    height: 100%;
+  height: 100%;
+}
+
+#root {
+  --primary-color: 47, 43, 229;
+  --secondary-color: 194, 160, 255;
+  --background-color: #48a3f817;
 }

@@ -49,6 +49,7 @@
 .chat_panel .gpt_log_chart {
   margin-top: 30px;
   height: 300px;
+  padding: 20px;
 
   border-radius: 10px;
   box-shadow: 0px 0px 21px 6px #E1DDFF;
@@ -68,4 +69,20 @@
 .chat_panel .gpt_loading_sign>img {
   height: 17px;
   padding: 0 6px;
+}
+
+.chat_panel .gpt_loading_sign.loading>img {
+  animation: 3s linear infinite spin;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

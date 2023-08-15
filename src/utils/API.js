@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { postChatAutoBIMock, postChatAutoReportMock } from './mock';
 
 const baseURL = 'https://chatlaw.cloud/chatfin'
 
@@ -7,16 +8,18 @@ const axiosInstance = axios.create({
 })
 
 const API = {
-  postChatAutoReport: (query) => axiosInstance.post('/chat_auto_report', { query }).then((res) => {
+  postChatAutoReport: (query, code) => axiosInstance.post('/chat_auto_report', { query, code }).then((res) => {
     console.log(res);
     return res
   }),
-  postChatAutoBI: (query) => axiosInstance.post('/chat_auto_bi', { query })
+  postChatAutoBI: (query, code) => axiosInstance.post('/chat_auto_bi', { query, code })
 }
 
 // const API = {
-//   postChatAutoReport: (query) => Promise.resolve(postChatAutoReportMock),
-//   postChatAutoBI: (query) => Promise.resolve(postChatAutoBIMock)
+//   postChatAutoReport: (query, code) => new Promise((resolve, reject) => 
+//     setTimeout(() => resolve(postChatAutoReportMock), 1000)
+//   ),
+//   postChatAutoBI: (query, code) => Promise.resolve(postChatAutoBIMock)
 // }
 
 export default API

@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 
 import loadingSVG from '../../assets/loading.svg';
+import tickSVG from '../../assets/tick.svg';
 
 export function UserLog({ data }) {
   return (
@@ -17,26 +18,29 @@ export function GptLog({ data }) {
   const { title, answer, chartDatas } = data;
 
   return (
-    <div className="gpt_log">
-      <div className="gpt_log_title">
-        { title }
-        <img alt='frame' src={ frameSVG } />
+    <>
+      <GptLoadingSign isLoading={ answer === undefined || chartDatas === undefined } />
+      <div className="gpt_log">
+        <div className="gpt_log_title">
+          { title }
+          <img alt='frame' src={ frameSVG } />
+        </div>
+        <div className="gpt_log_content">{ answer ?? "" }</div>
+        {
+          chartDatas?.map((chartData, index) => 
+            <KChart key={ index } data={ chartData } />
+          )
+        }
       </div>
-      <div className="gpt_log_content">{ answer }</div>
-      {
-        chartDatas.map((chartData, index) => 
-          <KChart key={ index } data={ chartData } />
-        )
-      }
-    </div>
+    </>
   );
 }
 
-export function GptLoadingSign() {
+export function GptLoadingSign({ isLoading }) {
   return (
-    <div className="gpt_loading_sign">
-      <img alt='正在分析' src={ loadingSVG } />
-      正在分析…
+    <div className={"gpt_loading_sign" + (isLoading ? " loading" : "")}>
+      <img alt='正在分析' src={ isLoading ? loadingSVG : tickSVG } />
+      { isLoading ? '正在分析…' : '分析完成' }
     </div>
   )
 }
@@ -77,7 +81,8 @@ const candleOption = {
     }
   },
   xAxis: {
-    type: 'category'
+    type: 'category',
+    inverse: true
   },
   yAxis: {
     scale: true,

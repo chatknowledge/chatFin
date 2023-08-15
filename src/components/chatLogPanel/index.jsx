@@ -1,18 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import "./index.css";
 import { ChatLogContext } from "../chatLogContext";
 import { UserLog, GptLog, GptLoadingSign } from "./components";
 
 import sendPNG from "../../assets/send.png";
+import chevronDownSVG from "../../assets/chevron-down.svg"
 
 export default function ChatLogPanel() {
-  const { chatLog, sendQuest } = useContext(ChatLogContext);
-  const [quest, setQuest] = useState("");
+  const { chatLog } = useContext(ChatLogContext);
+
+  const logRef = useRef(null);
+  useEffect(() => {
+    console.log(chatLog.length);
+    logRef.current.lastChild.scrollIntoView();
+  }, [chatLog.length]);
 
   return (
     <div className="chat_panel">
-      <div className="chat_log_panel">
-        {true && (
+      <div className="chat_log_panel" ref={logRef}>
+        {chatLog.length === 0 && (
           <div className="chat_welcome">
             <div className="chat_header">
               <div className="chat_header_title">欢迎使用 ChatFinance</div>
@@ -64,21 +70,89 @@ export default function ChatLogPanel() {
           )
         )}
       </div>
-      <div className="chat_input_panel">
-        <div className="chat_select_company">选择公司</div>
-        <div className="chat_input_box">
-          <input
-            className="chat_input_text"
-            type="text"
-            value={quest}
-            onChange={(e) => setQuest(e.target.value)}
-            onSubmit={(e) => sendQuest(quest)}
-          />
-          <button className="chat_send_button" onClick={() => sendQuest(quest)}>
-            <img className="chat_send_image" src={sendPNG} alt="发送" />
-          </button>
-        </div>
+      <ChatInputPanel />
+    </div>
+  );
+}
+
+function ChatInputPanel() {
+  const { sendQuest } = useContext(ChatLogContext);
+  const [quest, setQuest] = useState("");
+
+  return (
+    <div className="chat_input_panel">
+      <ChatInputChooseCompany />
+      <div className="chat_input_box">
+        <input
+          className="chat_input_text"
+          type="text"
+          value={quest}
+          onChange={(e) => setQuest(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendQuest(quest)}
+        />
+        <button className="chat_send_button" onClick={() => sendQuest(quest)}>
+          <img className="chat_send_image" src={sendPNG} alt="发送" />
+        </button>
       </div>
+    </div>
+  );
+}
+
+const companyData = {
+  '000002': '万科A',
+  '300676': '华大基因',
+  '688981': '中芯国际'
+};
+
+function ChatInputChooseCompany() {
+  const { companyCode, selectCompany } = useContext(ChatLogContext);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+
+  const handleSelectCompany = (code) => {
+    setIsPanelOpen(false);
+    selectCompany(code);
+  }
+
+  return (
+    <div
+      className="chat_select_company"
+      onClick={() => setIsPanelOpen(v => !v)}
+    >
+      <div className="chat_select_company_button">
+        { companyCode ? companyData[companyCode] : '选择公司' }
+      </div>
+      <img src={ chevronDownSVG } />
+      {isPanelOpen && (
+        <div className="chat_select_company_panel" onClick={(e) => e.stopPropagation()}>
+          <div className="chat_select_company_search">
+            <input
+              className="chat_select_company_search_input"
+              type="text"
+              placeholder="搜索公司名称"
+            />
+          </div>
+          <div className="chat_select_company_type">
+            <div className="chat_select_company_type_item">股票推荐</div>
+            <div className="chat_select_company_type_item">行业推荐</div>
+          </div>
+          {[
+            { name: "万科A", code: "000002", value: "1705" },
+            { name: "华大基因", code: "300676", value: "227.2" },
+            { name: "中芯国际", code: "688981", value: "3766" },
+          ].map((item) => (
+            <div
+              className="chat_select_company_item"
+              onClick={() => handleSelectCompany(item.code)}
+            >
+              <div className="chat_select_company_item_name">{item.name}</div>
+              <div style={{ flexGrow: 1 }} />
+              <div className="chat_select_company_item_value">
+                总市值 {item.value} 亿
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

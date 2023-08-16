@@ -1,6 +1,24 @@
 .cpnt_pages {
-    height: calc(100% - 84px);
+  position: relative;
+  height: calc(100% - 84px);
 }
+
 .cpnt_pages > * {
-    height: 100%;
+  height: 100%;
+}
+
+.cpnt_pages .background-up-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  opacity: 0.3;
+}
+
+.cpnt_pages .background-bottom-image {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  opacity: 0.3;
 }

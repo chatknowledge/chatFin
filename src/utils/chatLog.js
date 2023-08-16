@@ -4,6 +4,11 @@ import API from "./API";
 export function useChatLog() {
   const [chatLog, setChatLog] = useState([]);
   const [companyCode, setCompanyCode] = useState(undefined);
+  const [companyData, setCompanyData] = useState({
+    '000002': '万科A',
+    '300676': '华大基因',
+    '688981': '中芯国际'
+  });
 
   /**
    * Send a question.
@@ -16,7 +21,7 @@ export function useChatLog() {
     }, {
       type: "gptLog",
       data: {
-        title: "unknow"
+        title: companyCode ? (companyData[companyCode] + `(${companyCode})`) : '未选择公司',
       }
     }]);
 
@@ -84,5 +89,5 @@ export function useChatLog() {
     setCompanyCode(code);
   }
 
-  return { chatLog, companyCode, sendQuest, resetChatLog, selectCompany }
+  return { chatLog, companyCode, companyData, sendQuest, resetChatLog, selectCompany }
 }

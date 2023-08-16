@@ -4,6 +4,7 @@ import { ChatLogContext } from "../chatLogContext";
 import { UserLog, GptLog, GptLoadingSign } from "./components";
 
 import sendPNG from "../../assets/send.png";
+import loadingSVG from "../../assets/loading.svg";
 import chevronDownSVG from "../../assets/chevron-down.svg"
 
 export default function ChatLogPanel() {
@@ -12,7 +13,8 @@ export default function ChatLogPanel() {
   const logRef = useRef(null);
   useEffect(() => {
     console.log(chatLog.length);
-    logRef.current.lastChild.scrollIntoView();
+    if (chatLog.length)
+      logRef.current.lastChild.scrollIntoView();
   }, [chatLog.length]);
 
   return (
@@ -98,14 +100,8 @@ function ChatInputPanel() {
   );
 }
 
-const companyData = {
-  '000002': '万科A',
-  '300676': '华大基因',
-  '688981': '中芯国际'
-};
-
 function ChatInputChooseCompany() {
-  const { companyCode, selectCompany } = useContext(ChatLogContext);
+  const { companyCode, companyData, selectCompany } = useContext(ChatLogContext);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   const handleSelectCompany = (code) => {
@@ -118,10 +114,10 @@ function ChatInputChooseCompany() {
       className="chat_select_company"
       onClick={() => setIsPanelOpen(v => !v)}
     >
-      <div className="chat_select_company_button">
+      <div className="chat_select_company_name">
         { companyCode ? companyData[companyCode] : '选择公司' }
       </div>
-      <img src={ chevronDownSVG } />
+      <img className="chat_select_company_chevoron" src={ chevronDownSVG } />
       {isPanelOpen && (
         <div className="chat_select_company_panel" onClick={(e) => e.stopPropagation()}>
           <div className="chat_select_company_search">
@@ -132,8 +128,10 @@ function ChatInputChooseCompany() {
             />
           </div>
           <div className="chat_select_company_type">
-            <div className="chat_select_company_type_item">股票推荐</div>
+            <div className="chat_select_company_type_item active">股票推荐</div>
             <div className="chat_select_company_type_item">行业推荐</div>
+            <div style={{ flexGrow: 1 }} />
+            <img className="chat_select_company_type_reload" src={ loadingSVG } />
           </div>
           {[
             { name: "万科A", code: "000002", value: "1705" },

@@ -9,12 +9,14 @@ export function useChatLog() {
     '300676': '华大基因',
     '688981': '中芯国际'
   });
+  const [isQuestAllowed, setIsQuestAllowed] = useState(true);
 
   /**
    * Send a question.
    * @param {string} quest The question string to send.
    */
   const sendQuest = (quest) => {
+    setIsQuestAllowed(false);
     setChatLog(prev => [...prev, {
       type: "userLog",
       data: quest
@@ -25,7 +27,7 @@ export function useChatLog() {
       }
     }]);
 
-    API.postChatAutoReport(quest, companyCode)
+    const postChatAutoReportPromise = API.postChatAutoReport(quest, companyCode)
     .then(result => {
       setChatLog(prev => [...prev.slice(0, -1), 
         { 
@@ -35,7 +37,7 @@ export function useChatLog() {
       ]);
     });
 
-    API.postChatAutoBI(quest, companyCode)
+    const postChatAutoBIPromise = API.postChatAutoBI(quest, companyCode)
     .then(result => ({
     // answer: results[0].data.answer,
     chartDatas: 
@@ -73,6 +75,9 @@ export function useChatLog() {
         data: Object.assign(prev.at(-1).data, data)
       }
     ]));
+
+    Promise.all([postChatAutoReportPromise, postChatAutoBIPromise])
+      .then(() => setIsQuestAllowed(true));
   }
 
   /**
@@ -89,5 +94,5 @@ export function useChatLog() {
     setCompanyCode(code);
   }
 
-  return { chatLog, companyCode, companyData, sendQuest, resetChatLog, selectCompany }
+  return { chatLog, companyCode, companyData, isQuestAllowed, sendQuest, resetChatLog, selectCompany }
 }

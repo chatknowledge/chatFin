@@ -121,7 +121,7 @@
 .chat_panel .chat_log_panel::after {
   content: "";
   display: block;
-  height: calc(50% + 70px);
+  height: calc(70px + 5%);
   /* background-color: palevioletred; */
 }
 
@@ -129,15 +129,13 @@
   position: absolute;
   display: flex;
 
-  width: 83.3%;
   height: 60px;
-  left: 8.3%;
+  left: 8.35%;
+  right: 8.35%;
   bottom: 5%;
   gap: 20px;
 
   align-items: center;
-
-  /* background-color: aquamarine; */
 }
 
 .chat_panel .chat_reset_button {
@@ -158,6 +156,7 @@
 
   border-radius: 10px;
   border: 1px solid rgba(var(--primary-color), 0.42);
+  box-shadow: 2px 2px 11px 0px rgba(124, 26, 222, 0.08), 0px 0px 12px 0px rgba(25, 76, 151, 0.05);
   overflow: hidden;
 }
 
@@ -181,10 +180,19 @@
   /* height: 100%; */
   width: 70px;
   background-color: white;
+  fill: gainsboro;
 }
 
 .chat_panel .chat_send_image {
-  height: 90%;
+  margin: auto;
+  width: 25px;
+  height: 100%;
+
+  transition: fill 0.2s ease-in-out;
+}
+
+.chat_panel .chat_send_button.active:hover {
+  fill: rgba(var(--primary-color), 0.7);
 }
 
 .chat_panel .chat_select_company {
@@ -311,4 +319,10 @@
 .chat_select_company .chat_select_company_item_value {
   font-size: 14px;
   color: #5C6570;
+}
+
+.chat_select_company .chat_select_company_panel_background {
+  position: fixed;
+  inset: 0;
+  /* background-color: #80808080; */
 }

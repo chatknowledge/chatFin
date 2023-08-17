@@ -5,6 +5,7 @@ import * as echarts from 'echarts';
 
 import loadingSVG from '../../assets/loading.svg';
 import tickSVG from '../../assets/tick.svg';
+import menuSVG from '../../assets/menu-alt.svg';
 
 export function UserLog({ data }) {
   return (
@@ -22,10 +23,14 @@ export function GptLog({ data }) {
       <GptLoadingSign isLoading={ answer === undefined || chartDatas === undefined } />
       <div className="gpt_log">
         <div className="gpt_log_title">
+          <img alt='frame' src={ menuSVG } />
           { title }
-          <img alt='frame' src={ frameSVG } />
         </div>
-        <div className="gpt_log_content">{ answer ?? "" }</div>
+        <div className="gpt_log_content">
+          {
+            answer || <div className="gpt_log_fallback" />
+          }
+        </div>
         {
           chartDatas?.map((chartData, index) => 
             <KChart key={ index } data={ chartData } />
@@ -80,6 +85,12 @@ const candleOption = {
       type: 'cross'
     }
   },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
   xAxis: {
     type: 'category',
     inverse: true
@@ -106,6 +117,12 @@ const stackbarOption = {
     axisPointer: {
       type: 'shadow'
     }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
   },
   xAxis: {
     type: "category",

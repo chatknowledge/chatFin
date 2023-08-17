@@ -24,7 +24,7 @@
 }
 
 .chat_panel .gpt_log_title {
-  margin: 0 8px;
+  /* margin: 0 8px; */
 
   display: flex;
   align-items: center;
@@ -33,6 +33,11 @@
   color: rgb(var(--primary-color));
   font-size: 18px;
   font-weight: 500;
+  white-space: pre-line;
+}
+
+.chat_panel .gpt_log_title>img {
+  width: 22px;
 }
 
 .chat_panel .gpt_log_content {
@@ -45,6 +50,21 @@
   color: #333;
   font-size: 16px;
   font-weight: 500;
+  white-space: pre-wrap;
+}
+
+.chat_panel .gpt_log_fallback {
+  height: 20px;
+  width: 10px;
+
+  background-color: #8f8f8f;
+
+  animation: 1s steps(2, jump-none) infinite flash;
+}
+
+@keyframes flash {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .chat_panel .gpt_log_chart {
@@ -73,7 +93,7 @@
 }
 
 .chat_panel .gpt_loading_sign.loading>img {
-  animation: 3s linear infinite spin;
+  animation: 2s linear infinite spin;
 }
 
 @keyframes spin {

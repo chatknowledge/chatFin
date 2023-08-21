@@ -12,7 +12,18 @@ const API = {
     console.log(res);
     return res
   }),
-  postChatAutoBI: (query, code) => axiosInstance.post('/chat_auto_bi', { query, code })
+  postChatAutoBI: (query, code) => axiosInstance.post('/chat_auto_bi', { query, code }),
+  getSearchCompany: (query) => Promise.resolve(
+    Array.from({length: 4}, 
+      () => ({
+        name: "".concat(
+          ...Array.from({length: 4}, () => ['歪', '比', '吧', '卜'].at(Math.floor(Math.random()*4)))
+        ),
+        code: Math.floor(Math.random()*1000000).toString(),
+        value: Math.floor(Math.random()*1000).toFixed(2)
+      })
+    )
+  )
 }
 
 // const API = {

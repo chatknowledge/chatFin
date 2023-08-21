@@ -233,6 +233,7 @@
   background-color: #F7F6FB;
   border: 1px solid rgba(var(--primary-color), 0.40);
   box-shadow: 2px 2px 11px 0px rgba(111, 25, 151, 0.08);
+  overflow-y: scroll;
 
   cursor: auto;
 }
@@ -240,7 +241,10 @@
 .chat_select_company .chat_select_company_search {
   height: 50px;
   margin-bottom: 24px;
-  padding-left: 15px;
+  padding-left: 12px;
+
+  display: flex;
+  align-items: center;
 
   overflow: hidden;
 
@@ -249,9 +253,15 @@
   background: #FFF;
 }
 
+.chat_select_company .chat_select_company_search_icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 6px;
+}
+
 .chat_select_company .chat_select_company_search_input {
-  width: 100%;
   height: 100%;
+  flex-grow: 1;
 
   border: none;
   outline: none;
@@ -261,7 +271,7 @@
 }
 
 .chat_select_company .chat_select_company_type {
-  margin: 12px 0;
+  margin: 11px 0;
 
   display: flex;
   align-items: baseline;
@@ -299,7 +309,7 @@
 
 .chat_select_company .chat_select_company_item {
   padding: 12px 10px;
-  margin: 8px 0;
+  margin-top: 8px;
 
   display: flex;
   align-items: center;
